@@ -1,0 +1,15 @@
+name: movie_scraper
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - yt-dlp
+    - browser-cookie3
+    - vaderSentiment
+    - kagglehub
+    - pandas
+    - numpy
+    - requests
+    - tqdm
