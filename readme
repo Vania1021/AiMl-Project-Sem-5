@@ -1,1 +1,137 @@
-Aiml projoect 
+Age Rating Classification for Film Content
+
+A Machine Learning Framework using IMDb Severity Metadata and YouTube Sentiment Signals
+
+
+📌 Overview
+
+This project builds an automated, scalable age–appropriateness prediction system for movies by combining structured severity annotations from the IMDb Parental Guide dataset with sentiment-derived severity signals from YouTube movie trailer comments.
+Instead of relying on manual age-rating systems such as MPAA/BBFC, this project uses data-driven machine learning approaches to predict:
+Severity codes for:
+Sex & Nudity
+Violence & Gore
+Profanity
+Drugs/Alcohol
+Intense/Frightening Scenes
+Final MPAA Rating (G, PG, PG-13, R, NC-17)
+The framework is designed to be interpretable, reproducible, and cross-domain, aligning structured IMDb annotations with real-world audience sentiment.
+
+📂 Datasets
+1. IMDb Parental Guide Dataset (Training)
+Contains ~49k movies with human-annotated severity levels across 5 categories.
+Severity labels (None, Mild, Moderate, Severe) are encoded into 0–3.
+Includes metadata such as runtime, votes, ratings, and certification.
+2. YouTube Trailer Dataset (Testing)
+Contains movie trailer URLs. Additional fields generated through scraping & analysis:
+Top-20 user comments using yt-dlp
+Video metadata (views, likes, publish date)
+Sentiment polarity scores
+Keyword-based content mentions (violence, profanity, drugs, etc.)
+Sentiment distributions are automatically mapped to IMDb-like severity codes (0–3).
+
+⚙️ Methodology
+Step 1 — IMDb Data Preprocessing
+
+Encode severity labels
+Standardize MPAA ratings (G → NC-17)
+Handle missing values
+Log-transform skewed features (e.g., numVotes)
+Min–Max scaling
+Apply SMOTE to address class imbalance
+
+Step 2 — YouTube Comment Extraction & Sentiment Severity
+
+Extract comments + metadata
+Clean & preprocess text
+Apply sentiment analysis
+Convert aggregated sentiment → severity levels
+Align test dataset with IMDb schema
+
+Step 3 — Model Training
+
+A total of 12 machine learning models were trained:
+Logistic Regression
+Decision Tree
+KNN
+Random Forest
+Gradient Boosting
+XGBoost
+LightGBM
+CatBoost
+Bagging
+Voting Classifier
+AdaBoost
+MLP Neural Network
+Hyperparameter tuning used GridSearchCV + 5-fold cross-validation.
+
+Step 4 — Evaluation Metrics
+
+Performance was measured using:
+Accuracy
+Precision, Recall
+Weighted & Macro F1
+ROC–AUC Curves
+Precision–Recall Curves
+KS Statistic
+Lift Analysis
+
+
+🏆 Results
+Best-performing model:
+⭐ Random Forest
+Accuracy: 0.7759
+Weighted F1: 0.7093
+Other strong models: CatBoost, LightGBM, XGBoost, Bagging, Voting Classifier.
+Weak models: AdaBoost, MLP (due to imbalance and noisy labels).
+
+
+📊 Visual Insights
+
+The project includes rich EDA and diagnostic plots:
+Severity distribution
+Sentiment polarity distribution
+Word clouds & keyword frequencies
+ROC–AUC curves
+Precision–Recall curves
+KS curves
+Lift curves
+These help understand severity co-occurrence, user sentiment patterns, and classifier separability.
+
+📈 Key Insights
+
+Violence & Intense scenes show the highest correlation and have the strongest impact on MPAA prediction.
+LightGBM shows the best class separability (highest KS).
+Voting Classifier achieves near-perfect AUC in mid/high severity classes.
+IMDb severity labels transfer well to YouTube sentiment-derived severity, validating cross-domain alignment.
+
+
+🚧 Challenges
+
+Sparse high-severity categories (NC-17)
+Sarcasm or vague YouTube comments lowering sentiment accuracy
+Inconsistent content between trailers and full movies
+Noise introduced in keyword-based comment mapping
+
+
+🔮 Future Work
+
+Planned extensions include:
+Transformer-based sentiment modeling (sarcasm, nuance, multi-label)
+Vision models (ViT/CNN/LSTM) for scene-level severity estimation
+Cross-regional certification (CBFC, OFLC, CHVRS)
+Explainability (SHAP/LIME) for feature and phrase importance
+Enhanced multi-label severity extraction from comments
+
+
+📁 Repository
+
+All code, preprocessing scripts, and notebooks:
+👉 https://github.com/Vania1021/AiMl-Project-Sem-5
+
+👩‍💻 Authors
+
+Pulkita Gupta
+Vania Goel
+Sanjana
+Noor Aisha
+Arisha Rizwan
